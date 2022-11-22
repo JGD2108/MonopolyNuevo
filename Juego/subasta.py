@@ -1,5 +1,4 @@
 #import linkedList_jugadores
-
 class subasta:
     def __init__(self, jugador: str, propiedad_subasta: str, dinero: int):
         self.jugador = jugador
@@ -59,7 +58,7 @@ class subasta:
         print(f"La mayor propuesta es {participantes[propuesta_mayor]}, de {propuesta_mayor}")
 
 class acciones:
-    def __init__(self, dinero: int, jugador: str):
+    def __init__(self, dinero: int, jugador: jugador):
         self.dinero = dinero
         self.jugador = jugador
 
@@ -75,4 +74,5 @@ class acciones:
                 break
             else:
                 print("Eliga una opción válida")
+    
 

@@ -1,6 +1,7 @@
 import sys, time
 from Botones import Button
 import pygame
+from Tablero import Tablero
 from player import Jugador
 from Labels import Label
 from Listas.listaCircular import listaCircular
@@ -114,7 +115,10 @@ def roll():
         # show_labels()
     
 def play():
+    Board = listaCircular()
     Game.turnSelect(Game)
+    tablero = Tablero(Board)
+    tablero.getBoard()
     print(Game.currentPlayer)
     while True:
         pygame.display.set_caption("Play")

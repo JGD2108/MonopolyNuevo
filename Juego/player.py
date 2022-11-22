@@ -71,4 +71,8 @@ class Jugador():
 
     def check_if_bankrupt(self, amt_owed):
         pass
-    
+
+    def comprar(self):
+        ## poner mensaje de comprar o no 
+        ## if si se compra:
+        pass
