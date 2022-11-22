@@ -109,15 +109,6 @@ def roll():
     # into the loop
       # Label(LDICE, "1", 800, 450, 36)
         # show_labels()
-def jugar():
-    if (currentPlayer.puedoJugar):
-        cuantoSeMueve=currentPlayer.roll_dice()
-        currentPlayer.move_player(cuantoSeMueve)
-        changeTurn()
-    else:
-        changeTurn()
-        #currentPlayer.dias_En_Carcel -= 1 
-        #Implementen lo del boton.
     
 def play():
     Board = listaCircular()

@@ -51,7 +51,8 @@ class Jugador():
         if self.balance>obj.precio:
             obj.CambiarDueño = self.name
             self.cards_owned.append(obj)
-        else: 
+        else:
+            pass
             
     
 
