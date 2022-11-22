@@ -26,6 +26,7 @@ class listaCircular:
 
         if (P == self.PTR):
             print(P.data)
+        return P.data
 
     def __repr__(self):
         respuesta = ""

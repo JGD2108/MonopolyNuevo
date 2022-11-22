@@ -30,6 +30,8 @@ class Game:
         if (self.currentPlayer.puedoJugar):
             cuantoSeMueve=self.currentPlayer.roll_dice()
             self.currentPlayer.move_player(cuantoSeMueve)
+            ##verificar donde cae
+            
             Game.changeTurn(Game)
             pygame.display.update()
         else:
@@ -119,7 +121,6 @@ def play():
     Game.turnSelect(Game)
     tablero = Tablero(Board)
     tablero.getBoard()
-    print(Game.currentPlayer)
     while True:
         pygame.display.set_caption("Play")
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
