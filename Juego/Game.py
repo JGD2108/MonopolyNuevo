@@ -5,6 +5,49 @@ from Tablero import Tablero
 from player import Jugador
 from Labels import Label
 from Listas.listaCircular import listaCircular
+class Game:
+    def __init__(self) -> None:
+        self.currentPlayer: Jugador= None
+    def turnSelect(self):
+        valueJ = Jorge.roll_dice()
+        valueL = Luisa.roll_dice()
+        while True:
+            if valueJ==valueL:
+                valueJ = Jorge.roll_dice()
+                valueL = Luisa.roll_dice()
+            if valueJ> valueL and valueJ!=valueL:
+                self.currentPlayer = Jorge
+                self.currentPlayer.puedoJugar = True
+                Luisa.puedoJugar = False
+                break
+            else:
+                self.currentPlayer = Luisa
+                Jorge.puedoJugar = False
+                self.currentPlayer.puedoJugar = True
+                break
+        return self.currentPlayer
+    def jugar(self):
+        if (self.currentPlayer.puedoJugar):
+            cuantoSeMueve=self.currentPlayer.roll_dice()
+            self.currentPlayer.move_player(cuantoSeMueve)
+            Game.changeTurn(Game)
+            pygame.display.update()
+        else:
+            Game.changeTurn(Game)
+            pygame.display.update()
+            #currentPlayer.dias_En_Carcel -= 1 
+            #Implementen lo del boton.
+    def changeTurn(self):
+        if (self.currentPlayer == Luisa):
+            self.currentPlayer = Jorge
+            self.currentPlayer.puedoJugar = True
+            Luisa.puedoJugar = False
+        else:
+            self.currentPlayer = Luisa
+            Jorge.puedoJugar = False
+            Luisa.puedoJugar = True
+        return self.currentPlayer, Jorge, Luisa
+        
 
 Luisa = Jugador('Luisa',1500,[],1,False,0,False)
 Jorge = Jugador('Jorge',1500,[],1,False,0,False)
@@ -81,7 +124,6 @@ def play():
     Game.turnSelect(Game)
     tablero = Tablero(Board)
     tablero.getBoard()
-    print(Game.currentPlayer)
     while True:
         pygame.display.set_caption("Play")
         PLAY_MOUSE_POS = pygame.mouse.get_pos()

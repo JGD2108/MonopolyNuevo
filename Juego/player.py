@@ -5,7 +5,7 @@ class Jugador():
 
     def __init__(self, name: str, balance:int, cards_owned:list,
                     current_position:int, in_jail: bool, 
-                    doubles_counter:int,bankruptcy_status:bool):
+                    doubles_counter:int,bankruptcy_status:bool, efectos:list):
         self.name = name
         self.balance = balance
         self.cards_owned = cards_owned
@@ -14,6 +14,7 @@ class Jugador():
         self.doubles_counter = doubles_counter 
         self.bankruptcy_status = bankruptcy_status 
         self.puedoJugar = None
+        self.efectos = efectos
 
     def roll_dice(self):
         '''
@@ -44,6 +45,14 @@ class Jugador():
             self.current_position = posicion
 
         return self.current_position
+    def comprar_propiedad(self, obj:Propiedades):
+        ## boton propiedad
+        ## if yes 
+        if self.balance>obj.precio:
+            obj.CambiarDueño = self.name
+            self.cards_owned.append(obj)
+        else: 
+            
     
 
     def add_balance(self, amount):

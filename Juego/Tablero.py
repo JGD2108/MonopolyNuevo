@@ -52,7 +52,6 @@ class Tablero:
         self.Board.AddNode(propiedades[22])
         self.Board.AddNode(fortList)
         self.Board.AddNode(propiedades[23])
-
         return self.Board
 def getRows(excel_file, sheet_name, start_row = 1):
     excel_data = pd.read_excel(excel_file, sheet_name = sheet_name, header=None)
