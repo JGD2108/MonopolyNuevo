@@ -31,7 +31,7 @@ class Game:
             cuantoSeMueve=self.currentPlayer.roll_dice()
             self.currentPlayer.move_player(cuantoSeMueve)
             ##verificar donde cae
-            
+
             Game.changeTurn(Game)
             pygame.display.update()
         else:

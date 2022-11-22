@@ -52,7 +52,8 @@ class Jugador():
             obj.CambiarDueño = self.name
             self.cards_owned.append(obj)
         else: 
-            
+            pass
+
     
 
     def add_balance(self, amount):

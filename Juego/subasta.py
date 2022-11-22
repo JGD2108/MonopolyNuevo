@@ -58,7 +58,7 @@ class subasta:
         print(f"La mayor propuesta es {participantes[propuesta_mayor]}, de {propuesta_mayor}")
 
 class acciones:
-    def __init__(self, dinero: int, jugador: jugador):
+    def __init__(self, dinero: int, jugador: Jugador):
         self.dinero = dinero
         self.jugador = jugador
 
