@@ -4,6 +4,8 @@ from player import Jugador
 from Labels import Label
 from Listas.listaCircular import listaCircular
 
+pygame.init()
+
 Luisa = Jugador('Luisa',1500,[],1,False,0,False)
 Jorge = Jugador('Jorge',1500,[],1,False,0,False)
 
@@ -13,10 +15,6 @@ def count_bankrupt_players(players):
         if player.bankruptcy_status:
             counter += 1
     return counter
-
-
-
-pygame.init()
 
 #Definir colores
 BLACK   = (  0,   0,   0)
@@ -89,8 +87,9 @@ def roll():
     # text.draw()
     # time.sleep(3)
     # into the loop
-      # Label(LDICE, "1", 800, 450, 36)
-        # show_labels()
+    # Label(LDICE, "1", 800, 450, 36)
+    # show_labels()
+    
 def jugar():
     if (currentPlayer.puedoJugar):
         cuantoSeMueve=currentPlayer.roll_dice()
@@ -144,7 +143,7 @@ def play():
                     jugar()
         pygame.display.update()
                     
-                    
+
 def options():
     while True:
         pygame.display.set_caption("Options")
