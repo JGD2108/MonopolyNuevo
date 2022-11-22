@@ -1,4 +1,6 @@
 #import linkedList_jugadores
+from player import *
+
 class subasta:
     def __init__(self, jugador: str, propiedad_subasta: str, dinero: int):
         self.jugador = jugador

@@ -45,17 +45,6 @@ class Jugador():
             self.current_position = posicion
 
         return self.current_position
-    def comprar_propiedad(self, obj:Propiedades):
-        ## boton propiedad
-        ## if yes 
-        if self.balance>obj.precio:
-            obj.CambiarDueño = self.name
-            self.cards_owned.append(obj)
-        else: 
-            pass
-
-    
-
     def add_balance(self, amount):
         """
             Incrementa el capital del jugador

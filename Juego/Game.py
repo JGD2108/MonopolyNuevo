@@ -31,7 +31,7 @@ class Game:
             cuantoSeMueve=self.currentPlayer.roll_dice()
             self.currentPlayer.move_player(cuantoSeMueve)
             ##verificar donde cae
-
+            
             Game.changeTurn(Game)
             pygame.display.update()
         else:
@@ -51,8 +51,8 @@ class Game:
         return self.currentPlayer, Jorge, Luisa
         
 
-Luisa = Jugador('Luisa',1500,[],1,False,0,False)
-Jorge = Jugador('Jorge',1500,[],1,False,0,False)
+Luisa = Jugador('Luisa',1500,[],1,False,0,False,[])
+Jorge = Jugador('Jorge',1500,[],1,False,0,False,[])
 
 def count_bankrupt_players(players):
     counter = 0
@@ -60,10 +60,6 @@ def count_bankrupt_players(players):
         if player.bankruptcy_status:
             counter += 1
     return counter
-
-
-
-pygame.init()
 
 #Definir colores
 BLACK   = (  0,   0,   0)
@@ -121,6 +117,7 @@ def play():
     Game.turnSelect(Game)
     tablero = Tablero(Board)
     tablero.getBoard()
+    print(tablero.Board)
     while True:
         pygame.display.set_caption("Play")
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
@@ -162,7 +159,7 @@ def play():
                     Game.jugar(Game)
         pygame.display.update()
                     
-                    
+
 def options():
     while True:
         pygame.display.set_caption("Options")
