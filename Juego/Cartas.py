@@ -46,7 +46,7 @@ class Cofre():
         self.tipo = tipo
         self.info = info
     def Avanzar(obj:Jugador, pos:int):
-        obj.current_position = obj.current_position + pos
+        obj.move_player(pos)
         return obj.current_position
 
     def GanarDinero(self, obj:Jugador):
@@ -62,6 +62,19 @@ class Cofre():
         restarle al atributo
         """
         obj.reduce_balance(self.data)
+    def proceso(self,obj:Jugador):
+        if self.tipo=="1":
+            Cofre.GanarDinero(self,obj)
+        elif self.tipo== "2":
+            Cofre.Pagar(self,obj)
+        elif self.tipo=="3":
+            Cofre.Avanzar(obj,self.data)
+        elif self.tipo=="4":
+            if self.data == '"Go to Jail"':
+                obj.in_jail = True
+            else: 
+                obj.cards_owned.append("out of jail")
+
 
 class Fortuna():
      def __init__(self, info: str, data:str,tipo:str):
@@ -85,6 +98,18 @@ class Fortuna():
         restarle al atributo
         """
         obj.reduce_balance(self.data)
+     def proceso(self,obj:Jugador):
+        if self.tipo=="1":
+            Cofre.GanarDinero(self,obj)
+        elif self.tipo== "2":
+            Cofre.Pagar(self,obj)
+        elif self.tipo=="3":
+            Cofre.Avanzar(obj,self.data)
+        elif self.tipo=="4":
+            if self.data == '"Go to Jail"':
+                obj.in_jail = True
+            else: 
+                obj.cards_owned.append("out of jail")
 
 class Robo():
     def __init__(self,info:str ):

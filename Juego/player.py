@@ -1,5 +1,6 @@
 from random import randint
 from Listas.listaCircular import listaCircular
+from Cartas import *
 class Jugador():
 
     def __init__(self, name: str, balance:int, cards_owned:list,
@@ -23,28 +24,25 @@ class Jugador():
         #   self.puedoJugar = true
         #else: 
         #   self.puedoJugar = false   
-        dobles=0
-        while True:
-            dice1 = randint(1,6)
-            dice2 = randint(1,6)
-            self.dice_amt =dice1 + dice2
-            if dice1==dice2:
-                dobles =+1
-                if dobles == 3:
-                    break
-            else: 
-                break
-        if dobles==3:
-            print("Go to jail")
+        dice1 = randint(1,6)
+        dice2 = randint(1,6)
+        dice_amt = dice1 + dice2
+        if dice1==dice2: 
+            self.doubles_counter+=1
         else:
-            return self.dice_amt
+            self.doubles_counter=0
+        return dice_amt
 
     def move_player(self, dice_amt):
         """
         Mueve el jugador deacuerdo a lo indicado por el dado
         """
+        posicion = self.current_position+dice_amt
+        if posicion >39:
+            self.current_position = posicion - self.current_position
+        else:
+            self.current_position = posicion
 
-        self.current_position += dice_amt
         return self.current_position
     
 
@@ -74,4 +72,17 @@ class Jugador():
 
     def check_if_bankrupt(self, amt_owed):
         pass
-    
+## verificar que casilla es en la que estamos
+    def checkBoard(self, a:listaCircular):
+        if self.current_position==0:
+            self.add_balance(200)
+        elif self.current_position==1:
+            ## deseas comprar?
+            pass
+        elif self.current_position==2 or self.current_position==12 or self.current_position==22 or self.current_position==33:
+            Cofre.proceso(Cofre,self)
+        elif self.current_position==7 or self.current_position==17 or self.current_position==28 or self.current_position==38:
+            Fortuna.proceso(Fortuna,self)
+            
+        
+
