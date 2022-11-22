@@ -36,8 +36,12 @@ class Jugador():
         """
         Mueve el jugador deacuerdo a lo indicado por el dado
         """
+        posicion = self.current_position+dice_amt
+        if posicion >39:
+            self.current_position = posicion - self.current_position
+        else:
+            self.current_position = posicion
 
-        self.current_position += dice_amt
         return self.current_position
     
 

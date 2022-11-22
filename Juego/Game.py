@@ -4,6 +4,49 @@ import pygame
 from player import Jugador
 from Labels import Label
 from Listas.listaCircular import listaCircular
+class Game:
+    def __init__(self) -> None:
+        self.currentPlayer: Jugador= None
+    def turnSelect(self):
+        valueJ = Jorge.roll_dice()
+        valueL = Luisa.roll_dice()
+        while True:
+            if valueJ==valueL:
+                valueJ = Jorge.roll_dice()
+                valueL = Luisa.roll_dice()
+            if valueJ> valueL and valueJ!=valueL:
+                self.currentPlayer = Jorge
+                self.currentPlayer.puedoJugar = True
+                Luisa.puedoJugar = False
+                break
+            else:
+                self.currentPlayer = Luisa
+                Jorge.puedoJugar = False
+                self.currentPlayer.puedoJugar = True
+                break
+        return self.currentPlayer
+    def jugar(self):
+        if (self.currentPlayer.puedoJugar):
+            cuantoSeMueve=self.currentPlayer.roll_dice()
+            self.currentPlayer.move_player(cuantoSeMueve)
+            Game.changeTurn(Game)
+            pygame.display.update()
+        else:
+            Game.changeTurn(Game)
+            pygame.display.update()
+            #currentPlayer.dias_En_Carcel -= 1 
+            #Implementen lo del boton.
+    def changeTurn(self):
+        if (self.currentPlayer == Luisa):
+            self.currentPlayer = Jorge
+            self.currentPlayer.puedoJugar = True
+            Luisa.puedoJugar = False
+        else:
+            self.currentPlayer = Luisa
+            Jorge.puedoJugar = False
+            Luisa.puedoJugar = True
+        return self.currentPlayer, Jorge, Luisa
+        
 
 Luisa = Jugador('Luisa',1500,[],1,False,0,False)
 Jorge = Jugador('Jorge',1500,[],1,False,0,False)
@@ -51,24 +94,6 @@ boton_menu = pygame.Rect(775, 636, 120, 25)
 currentPlayer:Jugador= None
 
 labels = []
-def turnSelect():
-    valueJ = Jorge.roll_dice()
-    valueL = Luisa.roll_dice()
-    while True:
-        if valueJ==valueL:
-            valueJ = Jorge.roll_dice()
-            valueL = Luisa.roll_dice()
-        if valueJ> valueL and valueJ!=valueL:
-            currentPlayer = Jorge
-            currentPlayer.puedoJugar = True
-            Luisa.puedoJugar = False
-            break
-        else:
-            currentPlayer = Luisa
-            Jorge.puedoJugar = False
-            currentPlayer.puedoJugar = True
-            break
-    return currentPlayer
 def show_labels():
 	for _ in labels:
 		_.draw()
@@ -79,17 +104,6 @@ def trade():
 def auction():
     pass
 
-def changeTurn():
-    if (currentPlayer == Luisa):
-        currentPlayer = Jorge
-        currentPlayer.puedoJugar = True
-        Luisa.puedoJugar = False
-    else:
-        currentPlayer = Luisa
-        Jorge.puedoJugar = False
-        Luisa.puedoJugar = True
-    return currentPlayer
-
 def roll():
     Luisa.roll_dice()
     # text = Label(screen, "1", 781, 378, 60, "white") # out of loop
@@ -98,18 +112,10 @@ def roll():
     # into the loop
       # Label(LDICE, "1", 800, 450, 36)
         # show_labels()
-def jugar():
-    if (currentPlayer.puedoJugar):
-        cuantoSeMueve=currentPlayer.roll_dice()
-        currentPlayer.move_player(cuantoSeMueve)
-        changeTurn()
-    else:
-        changeTurn()
-        #currentPlayer.dias_En_Carcel -= 1 
-        #Implementen lo del boton.
     
 def play():
-    turnSelect()
+    Game.turnSelect(Game)
+    print(Game.currentPlayer)
     while True:
         pygame.display.set_caption("Play")
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
@@ -148,8 +154,7 @@ def play():
                     main_menu()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_ROLL.checkForInput(PLAY_MOUSE_POS):
-                    print(currentPlayer)
-                    jugar()
+                    Game.jugar(Game)
         pygame.display.update()
                     
                     
