@@ -23,21 +23,14 @@ class Jugador():
         #   self.puedoJugar = true
         #else: 
         #   self.puedoJugar = false   
-        dobles=0
-        while True:
-            dice1 = randint(1,6)
-            dice2 = randint(1,6)
-            self.dice_amt =dice1 + dice2
-            if dice1==dice2:
-                dobles =+1
-                if dobles == 3:
-                    break
-            else: 
-                break
-        if dobles==3:
-            print("Go to jail")
+        dice1 = randint(1,6)
+        dice2 = randint(1,6)
+        dice_amt = dice1 + dice2
+        if dice1==dice2: 
+            self.doubles_counter+=1
         else:
-            return self.dice_amt
+            self.doubles_counter=0
+        return dice_amt
 
     def move_player(self, dice_amt):
         """

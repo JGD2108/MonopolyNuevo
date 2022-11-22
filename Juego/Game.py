@@ -1,5 +1,6 @@
-import pygame, sys, time
+import sys, time
 from Botones import Button
+import pygame
 from player import Jugador
 from Labels import Label
 from Listas.listaCircular import listaCircular
@@ -31,11 +32,11 @@ size = (945, 710)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Menu")
 
-background_juego = pygame.image.load("Juego/Recursos/tablero_monopolio.png").convert()
-background_menu = pygame.image.load("Juego/Recursos/menu.png").convert()
+background_juego = pygame.image.load("valesVg/Recursos/tablero_monopolio.png").convert()
+background_menu = pygame.image.load("valesVg/Recursos/menu.png").convert()
 
 def get_font(size): # Returns Press-Start-2P in the desired size
-    return pygame.font.Font("Juego/Recursos/font.ttf", size)
+    return pygame.font.Font("valesVg/Recursos/font.ttf", size)
 
 #myFont = pygame.font.SysFont("Calibri", 30)
 
@@ -47,22 +48,27 @@ done = False
 boton_trade = pygame.Rect(770, 507, 120, 25)
 boton_auction = pygame.Rect(775, 570, 120, 25)
 boton_menu = pygame.Rect(775, 636, 120, 25)
-currentPlayer = None
+currentPlayer:Jugador= None
 
 labels = []
 def turnSelect():
     valueJ = Jorge.roll_dice()
     valueL = Luisa.roll_dice()
-    if valueJ> valueL:
-        currentPlayer = Jorge
-        Jorge.puedoJugar = True
-        Luisa.puedoJugar = False
-    else:
-        currentPlayer = Luisa
-        Jorge.puedoJugar = False
-        Luisa.puedoJugar = True
-
-
+    while True:
+        if valueJ==valueL:
+            valueJ = Jorge.roll_dice()
+            valueL = Luisa.roll_dice()
+        if valueJ> valueL and valueJ!=valueL:
+            currentPlayer = Jorge
+            currentPlayer.puedoJugar = True
+            Luisa.puedoJugar = False
+            break
+        else:
+            currentPlayer = Luisa
+            Jorge.puedoJugar = False
+            currentPlayer.puedoJugar = True
+            break
+    return currentPlayer
 def show_labels():
 	for _ in labels:
 		_.draw()
@@ -76,15 +82,16 @@ def auction():
 def changeTurn():
     if (currentPlayer == Luisa):
         currentPlayer = Jorge
-        Jorge.puedoJugar = True
+        currentPlayer.puedoJugar = True
         Luisa.puedoJugar = False
     else:
         currentPlayer = Luisa
         Jorge.puedoJugar = False
         Luisa.puedoJugar = True
+    return currentPlayer
 
 def roll():
-    Luisa.roll_dice()  
+    Luisa.roll_dice()
     # text = Label(screen, "1", 781, 378, 60, "white") # out of loop
     # text.draw()
     # time.sleep(3)
@@ -141,6 +148,7 @@ def play():
                     main_menu()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_ROLL.checkForInput(PLAY_MOUSE_POS):
+                    print(currentPlayer)
                     jugar()
         pygame.display.update()
                     
@@ -180,11 +188,11 @@ def main_menu():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
-        PLAY_BUTTON = Button(image=pygame.image.load("Juego/Recursos/Play Rect.png"), pos=(100, 350), 
+        PLAY_BUTTON = Button(image=pygame.image.load("valesVg/Recursos/Play Rect.png"), pos=(100, 350), 
                             text_input="PLAY", font=get_font(20), base_color="#d7fcd4", hovering_color="White")
-        OPTIONS_BUTTON = Button(image=pygame.image.load("Juego/Recursos/Play Rect.png"), pos=(100, 450), 
+        OPTIONS_BUTTON = Button(image=pygame.image.load("valesVg/Recursos/Play Rect.png"), pos=(100, 450), 
                             text_input="OPTIONS", font=get_font(20), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("Juego/Recursos/Play Rect.png"), pos=(100, 550), 
+        QUIT_BUTTON = Button(image=pygame.image.load("valesVg/Recursos/Play Rect.png"), pos=(100, 550), 
                             text_input="QUIT", font=get_font(20), base_color="#d7fcd4", hovering_color="White")
 
         for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
