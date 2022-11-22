@@ -74,11 +74,11 @@ size = (945, 710)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Menu")
 
-background_juego = pygame.image.load("valesVg/Recursos/tablero_monopolio.png").convert()
-background_menu = pygame.image.load("valesVg/Recursos/menu.png").convert()
+background_juego = pygame.image.load("Recursos/tablero_monopolio.png").convert()
+background_menu = pygame.image.load("Recursos/menu.png").convert()
 
 def get_font(size): # Returns Press-Start-2P in the desired size
-    return pygame.font.Font("valesVg/Recursos/font.ttf", size)
+    return pygame.font.Font("Recursos/font.ttf", size)
 
 #myFont = pygame.font.SysFont("Calibri", 30)
 
@@ -195,11 +195,11 @@ def main_menu():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
-        PLAY_BUTTON = Button(image=pygame.image.load("valesVg/Recursos/Play Rect.png"), pos=(100, 350), 
+        PLAY_BUTTON = Button(image=pygame.image.load("Recursos/Play Rect.png"), pos=(100, 350), 
                             text_input="PLAY", font=get_font(20), base_color="#d7fcd4", hovering_color="White")
-        OPTIONS_BUTTON = Button(image=pygame.image.load("valesVg/Recursos/Play Rect.png"), pos=(100, 450), 
+        OPTIONS_BUTTON = Button(image=pygame.image.load("Recursos/Play Rect.png"), pos=(100, 450), 
                             text_input="OPTIONS", font=get_font(20), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("valesVg/Recursos/Play Rect.png"), pos=(100, 550), 
+        QUIT_BUTTON = Button(image=pygame.image.load("Recursos/Play Rect.png"), pos=(100, 550), 
                             text_input="QUIT", font=get_font(20), base_color="#d7fcd4", hovering_color="White")
 
         for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
