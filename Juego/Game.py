@@ -103,8 +103,6 @@ def jugar():
     
 def play():
     turnSelect()
-        
-    
     while True:
         pygame.display.set_caption("Play")
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
@@ -146,12 +144,7 @@ def play():
                     jugar()
         pygame.display.update()
                     
-        
-        
-        
-
-        
-
+                    
 def options():
     while True:
         pygame.display.set_caption("Options")
