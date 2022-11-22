@@ -1,5 +1,6 @@
 from random import randint
 from Listas.listaCircular import listaCircular
+from Cartas import *
 class Jugador():
 
     def __init__(self, name: str, balance:int, cards_owned:list,
@@ -71,8 +72,17 @@ class Jugador():
 
     def check_if_bankrupt(self, amt_owed):
         pass
+## verificar que casilla es en la que estamos
+    def checkBoard(self, a:listaCircular):
+        if self.current_position==0:
+            self.add_balance(200)
+        elif self.current_position==1:
+            ## deseas comprar?
+            pass
+        elif self.current_position==2 or self.current_position==12 or self.current_position==22 or self.current_position==33:
+            Cofre.proceso(Cofre,self)
+        elif self.current_position==7 or self.current_position==17 or self.current_position==28 or self.current_position==38:
+            Fortuna.proceso(Fortuna,self)
+            
+        
 
-    def comprar(self):
-        ## poner mensaje de comprar o no 
-        ## if si se compra:
-        pass
