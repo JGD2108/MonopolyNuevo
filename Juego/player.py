@@ -5,7 +5,7 @@ class Jugador():
 
     def __init__(self, name: str, balance:int,
                     current_position:int, in_jail: bool, 
-                    doubles_counter:int,bankruptcy_status:bool, efectos:list):
+                    doubles_counter:int,bankruptcy_status:bool):
         self.name = name
         self.balance = balance
         self.current_position = current_position
@@ -13,7 +13,6 @@ class Jugador():
         self.doubles_counter = doubles_counter 
         self.bankruptcy_status = bankruptcy_status 
         self.puedoJugar = None
-        self.efectos = efectos
 
     def roll_dice(self):
         '''

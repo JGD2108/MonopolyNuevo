@@ -4,6 +4,7 @@ from Botones import Button
 import pygame
 from Tablero import Tablero,chestList,fortList,robar
 from player import Jugador
+from Labels import Label
 from Cartas import *
 from Cartas import Robo,Fortuna,Cofre
 from Listas.listaCircular import listaCircular
@@ -11,8 +12,8 @@ from Listas.listaCircular import listaCircular
 Board = listaCircular()
 tablero = Tablero(Board)
 tablero.getBoard()
-Luisa = Jugador('Luisa',1500,1,False,0,False)
-Jorge = Jugador('Jorge',1500,1,False,0,False)
+Luisa = Jugador('Luisa',1500,0,False,0,False)
+Jorge = Jugador('Jorge',1500,0,False,0,False)
 class Game:
     def __init__(self) -> None:
         self.currentPlayer: Jugador= None
@@ -38,9 +39,6 @@ class Game:
     def check_pos(self, board:Tablero):
   
         brd_property = board.Board.Recorrido(self.currentPlayer.current_position)
-        print(self.currentPlayer.current_position)
-
-        
         if(isinstance(brd_property, Propiedades)):
 
             print(f"Estas en {brd_property.nombre}")
@@ -54,6 +52,7 @@ class Game:
                     brd_property.CambiarDueño = self.currentPlayer.name
                     self.currentPlayer.reduce_balance(brd_property.precio)
                     print(f"Enhora buena {self.currentPlayer.name} ahora eres dueñ@ de {brd_property.nombre}")
+        
                     print(f"Tu saldo actual es de {self.currentPlayer.balance}")
 
                 elif(user_choice==2):
