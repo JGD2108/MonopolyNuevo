@@ -101,9 +101,10 @@ def trade():
     pass
 
 def auction():
-    screen = pygame.display.set_mode(size)
-    pygame.display.set_caption("Menu")
-    pygame.display.flip()
+    try:
+        auc = int(input("Digita un numero: "))
+    except ValueError:
+        print("DIGITA UN NUMERO VALIDO")
 
 def roll():
     Luisa.roll_dice()
@@ -119,7 +120,7 @@ def play():
     Game.turnSelect(Game)
     tablero = Tablero(Board)
     tablero.getBoard()
-    print(tablero.Board.Recorrido(1))
+    print(tablero.Board.Recorrido(41))
     while True:
         pygame.display.set_caption("Play")
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
@@ -160,6 +161,9 @@ def play():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_ROLL.checkForInput(PLAY_MOUSE_POS):
                     Game.jugar(Game)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PLAY_AUCTION.checkForInput(PLAY_MOUSE_POS):
+                    auction()
         pygame.display.update()
                     
 

@@ -16,26 +16,17 @@ class listaCircular:
     
     def Recorrido(self,amt:int):
         P = self.PTR
-        print(P.data, end="->")
-        P = P.next
-        
-        while((P != self.PTR)and amt>0):
-            print(P.data, end="->")
+
+        #print(P.data, end="->")
+        if amt>0:
             P = P.next
-            amt=amt-1
+            cont=1
+            while((P != self.PTR)and cont<amt):
+                #print(P.data, end="->")
+                P = P.next
+                cont+=1
+            return P.data
+        elif amt==0:
+            return P.data
 
-        if (P == self.PTR):
-            print(P.data)
-        return P.data
-
-    def __repr__(self):
-        respuesta = ""
-        P = self.PTR
-        respuesta = respuesta + str(P.data) + "->"
-        P = P.next
-        while(P != self.PTR):
-            respuesta = respuesta + str(P.data) + "->"
-            P = P.next
-        respuesta = respuesta +  str(P.data) 
-        return respuesta
-
+    
