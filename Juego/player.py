@@ -68,6 +68,8 @@ class Jugador():
   
         brd_property = board.Recorrido(self.current_position)
         
+        if(brd_property):
+            pass
 
         '''
             serie de condicionales que comprueban la posicion
