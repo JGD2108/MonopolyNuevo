@@ -74,7 +74,7 @@ class Fortuna():
         self.data = data #Dato a operar
         self.tipo = tipo #Tipos
         self.info = info ## Texto carta
-     def Avanzar(obj:Jugador, pos:int):
+     def Avanzar(pos:int,obj:Jugador):
         obj.current_position = obj.current_position + pos
         return obj.current_position
 
@@ -93,11 +93,11 @@ class Fortuna():
         obj.reduce_balance(self.data)
      def proceso(self,obj:Jugador):
         if self.tipo=="1":
-            Cofre.GanarDinero(self,obj)
+            Fortuna.GanarDinero(self,obj)
         elif self.tipo== "2":
-            Cofre.Pagar(self,obj)
+            Fortuna.Pagar(self,obj)
         elif self.tipo=="3":
-            Cofre.Avanzar(obj,self.data)
+            Fortuna.Avanzar(self.data, obj)
         elif self.tipo=="4":
             if self.data == '"Go to Jail"':
                 obj.in_jail = True

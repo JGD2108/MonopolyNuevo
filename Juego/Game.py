@@ -1,10 +1,12 @@
 import sys, time
+from random import randint
 from Botones import Button
 import pygame
-from Tablero import Tablero,chestList,fortList
+from Tablero import Tablero,chestList,fortList,robar
 from player import Jugador
 from Labels import Label
 from Cartas import *
+from Cartas import Robo,Fortuna,Cofre
 from Listas.listaCircular import listaCircular
 
 Board = listaCircular()
@@ -40,31 +42,165 @@ class Game:
 
         
         if(isinstance(brd_property, Propiedades)):
-            ## input comprar o subastar
-            ## si comprar, resta balance, añade a lista, Propiedad.CambiarDueño= self.current_player
-            ## brd_property.CambiarDueño = self.current_player
-            ## si va subastar: print("Unda el boton subasta")
-            print("Estas en una propiedad")
+            # input comprar o subastar
+            # si comprar, resta balance, añade a lista, Propiedad.CambiarDueño= self.current_player
+            
+            #si va subastar: print("Unda el boton subasta")
+            # print(f"Estas en {brd_property.nombre})
+            if(brd_property.dueño=="Bank"):
+                print(f"la propiedad tiene un valor de: {brd_property.precio}")
+                user_choice = int(input("Desea comprar o subastar? 1 o 2 "))
+                while((user_choice<1) or (user_choice>2)):
+                    user_choice = int(input("Desea comprar o subastar? 1 o 2 "))
+                
+                if(user_choice==1):
+                    brd_property.CambiarDueño = self.currentPlayer
+                    self.currentPlayer.reduce_balance(brd_property.precio)
+                    print(f"Enhora buena {self.currentPlayer.name} ahora eres dueñ@ de {brd_property.nombre}")
+                    print(f"Tu saldo actual es de {self.currentPlayer.balance}")
+                elif(user_choice==2):
+                    pass
+            else:
+                print(f"Oh nooo, {brd_property.dueño} es dueño de la propiedad")
+                print(f"Tendras que pagar {brd_property.renta}")
+                self.currentPlayer.reduce_balance(brd_property.renta)
+                
+                print(f"Tu saldo actual es de {self.currentPlayer.balance}")
+                
 
         elif(brd_property==chestList):
             print("Estas en un  cofre")
+            print(self.currentPlayer.current_position)
+            print(self.currentPlayer.balance)
+            print(self.currentPlayer.in_jail)
+            opc = randint(0,13)
+            cont = 1
+            if cont==opc:
+                x = chestList[cont]
+                print(x.data)
+                print(x.info)
+                print(x.tipo)
+                if x.tipo==1:
+                    print("entre")
+                    Cofre.GanarDinero(x,self.currentPlayer)
+                elif x.tipo== 2:
+                    print("entre")
+                    Cofre.Pagar(x,self.currentPlayer)
+                elif x.tipo==3:
+                    print("entre")
+                    self.currentPlayer.move_player(x.data)
+                elif x.tipo==4:
+                    print("entre")
+                    if self.data == "Go to Jail":
+                        self.currentPlayer.in_jail = True
+            else:
+                while cont<opc:
+                    cont+=1
+                x = chestList[cont]
+                print(x.data)
+                print(x.info)
+                print(x.tipo)
+                if x.tipo==1:
+                    print("entre")
+                    Cofre.GanarDinero(x,self.currentPlayer)
+                elif x.tipo== 2:
+                    print("entre")
+                    Cofre.Pagar(x,self.currentPlayer)
+                elif x.tipo==3:
+                    print("entre")
+                    self.currentPlayer.move_player(x.data)
+                elif x.tipo==4:
+                    print("entre")
+                    if x.data == "Go to Jail":
+                        self.currentPlayer.in_jail = True
+                print(self.currentPlayer.current_position)
+                print(self.currentPlayer.balance)
+                print(self.currentPlayer.in_jail)
         elif(brd_property==fortList):
-            print("Estas en una fortuna")
+            print("Estas en un fortuna")
+            print(self.currentPlayer.current_position)
+            print(self.currentPlayer.balance)
+            print(self.currentPlayer.in_jail)
+            opc = randint(0,12)
+            cont = 1
+            if cont==opc:
+                x = fortList[cont]
+                print(x.data)
+                print(x.info)
+                print(x.tipo)
+                if x.tipo==1:
+                    print("entre")
+                    Fortuna.GanarDinero(x,self.currentPlayer)
+                elif x.tipo== 2:
+                    print("entre")
+                    Fortuna.Pagar(x,self.currentPlayer)
+                elif x.tipo==3:
+                    print("entre")
+                    self.currentPlayer.move_player(x.data)
+                elif x.tipo==4:
+                    print("entre")
+                    if x.data == "Go to Jail":
+                        self.currentPlayer.in_jail = True
+            else:
+                while cont<opc:
+                    cont+=1
+                x = fortList[cont]
+                print(x.data)
+                print(x.info)
+                print(x.tipo)
+                if x.tipo==1:
+                    print("entre")
+                    Fortuna.GanarDinero(x,self.currentPlayer)
+                elif x.tipo== 2:
+                    print("entre")
+                    Fortuna.Pagar(x,self.currentPlayer)
+                elif x.tipo==3:
+                    print("entre")
+                    self.currentPlayer.move_player(x.data)
+                elif x.tipo==4:
+                    print("entre")
+                    if x.data == "Go to Jail":
+                        self.currentPlayer.in_jail = True
+            print(self.currentPlayer.current_position)
+            print(self.currentPlayer.balance)
+            print(self.currentPlayer.in_jail)
         else:
-            print("wiuwiuwiuww")
+            print(self.currentPlayer.balance)
+            opc = randint(0,3)
+            cont = 1
+            if cont==opc:
+                x = robar[cont]
+                Robo.Robar(self.currentPlayer, x.data)
+                Robo.Atrapar(self.currentPlayer)
+            else:
+                while cont<opc:
+                    cont+=1
+                x = robar[cont]
+                Robo.Robar(self.currentPlayer, x.data)
+                Robo.Atrapar(self.currentPlayer)
+            print(self.currentPlayer.balance)
+            print(self.currentPlayer.in_jail)
+            
     def jugar(self):
         if (self.currentPlayer.puedoJugar):
-            cuantoSeMueve=self.currentPlayer.roll_dice()
-            self.currentPlayer.move_player(cuantoSeMueve)
+            if self.currentPlayer.in_jail == False:
+                print(f"Estas Jugando: {self.currentPlayer.name}")
+                cuantoSeMueve=self.currentPlayer.roll_dice()
+                self.currentPlayer.move_player(cuantoSeMueve)
+                self.check_pos(self,tablero)
+            else:
+                print(f"Estas Jugando: {self.currentPlayer.name}")
+                print("Estas en la carcel")
+                self.currentPlayer.current_position = 10
+                self.currentPlayer.checkDouble()
             ##verificar donde cae
-            self.check_pos(self,tablero)
+            if (self.currentPlayer.balance<=0):
+                self.currentPlayer.bankruptcy_status = True
+            if (self.currentPlayer.bankruptcy_status== False):
+                print("Has Perdido")
+                pygame.display.quit()
             Game.changeTurn(Game)
             pygame.display.update()
-        else:
-            Game.changeTurn(Game)
-            pygame.display.update()
-            #currentPlayer.dias_En_Carcel -= 1 
-            #Implementen lo del boton.
     def changeTurn(self):
         if (self.currentPlayer == Luisa):
             self.currentPlayer = Jorge

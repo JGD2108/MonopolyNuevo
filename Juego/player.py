@@ -29,7 +29,6 @@ class Jugador():
         dice2 = randint(1,6)
         dice_amt = dice1 + dice2
         if dice1==dice2: 
-            self.doubles_counter+=1
             self.in_jail = False
         else:
             self.doubles_counter=0
@@ -46,6 +45,16 @@ class Jugador():
             self.current_position = posicion
 
         return self.current_position
+
+    def checkDouble(self):
+        dice1 = randint(1,6)
+        dice2 = randint(1,6)
+        if dice1==dice2: 
+            self.in_jail = False
+        else:
+            self.in_jail = True
+
+
     def add_balance(self, amount):
         """
             Incrementa el capital del jugador
@@ -67,13 +76,6 @@ class Jugador():
         
     def check_if_bankrupt(self, amt_owed):
         pass
-
-class Jail:
-    def __init__(self) -> None:
-        self.jugador: Jugador = None
-    def checkCarcel(self):
-        if self.jugador.in_jail == True:
-            self.jugador.roll_dice()
 
         
 
