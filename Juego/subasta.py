@@ -1,18 +1,19 @@
 #import linkedList_jugadores
-from player import *
+from player import Jugador
+from Cartas import Propiedades
 
 class subasta:
-    def __init__(self, jugador: str, propiedad_subasta: str, dinero: int):
+    def __init__(self, jugador: Jugador, propiedad_subasta: Propiedades):
         self.jugador = jugador
         self.propiedad_subasta = propiedad_subasta
-        self.dinero = dinero
     
-    def subastar(self, participantes: dict):
+    def subastar(self):
         """
         Se hace un objeto tipo linkedList de los jugadores para que por medio del ciclo,
         vaya haciendo las mismas preguntas y añadiendo en una lista aparte los participantes que van,
         a jugar la subasta.
         """
+
         #lista_jugadores = linkedList_jugadores(jugadores))
         #p = lista_jugadores.head
         #for i in range(cant_jugadores):
@@ -23,7 +24,7 @@ class subasta:
             opc = int(input("1. Si; 2. no"))
             if (opc == 1):
                 propuesta = self.hacer_propuesta()
-                participantes[self.jugador] = propuesta
+                #participantes[self.jugador] = propuesta
                 #p = p.next  
                 break
             elif (opc == 2):
@@ -31,7 +32,7 @@ class subasta:
                 break
             else:
                 print("Digite una opción válida")
-        return participantes   
+        #return participantes   
 
     def hacer_propuesta(self):
         print(f"{self.jugador}, Su dinero actual es: {self.dinero}")

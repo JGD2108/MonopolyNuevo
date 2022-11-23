@@ -4,8 +4,8 @@ class listaCircular:
         self.PTR = None
         self.ULT = None
 
-    def AddNode(self,data):
-        P = Nodo(data)
+    def AddNode(self,data,coordenadas):
+        P = Nodo(data,coordenadas)
         if (self.PTR == None):
             self.PTR = P
             self.ULT = P 

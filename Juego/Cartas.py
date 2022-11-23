@@ -112,16 +112,9 @@ class Fortuna():
                 obj.cards_owned.append("out of jail")
 
 class Robo():
-    def __init__(self,info:str ):
+    def __init__(self,info:str,data:str):
         self.info = info
-    
-    def Dado_Tramposo(obj:Jugador):
-        """
-        Le suma cierta cantidad al dado de verdad
-        """
-        dice = randint(1,6)
-        obj.dice_amt = obj.dice_amt+dice
-        return obj.dice_amt
+        self.data = data
     
     def Robar(obj:Jugador, data):
         obj.balance+=data

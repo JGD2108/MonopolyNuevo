@@ -101,7 +101,9 @@ def trade():
     pass
 
 def auction():
-    pass
+    screen = pygame.display.set_mode(size)
+    pygame.display.set_caption("Menu")
+    pygame.display.flip()
 
 def roll():
     Luisa.roll_dice()
@@ -117,7 +119,7 @@ def play():
     Game.turnSelect(Game)
     tablero = Tablero(Board)
     tablero.getBoard()
-    print(tablero.Board)
+    print(tablero.Board.Recorrido(1))
     while True:
         pygame.display.set_caption("Play")
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
@@ -148,6 +150,7 @@ def play():
 
         
         for event in pygame.event.get():
+            #print(event)
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
