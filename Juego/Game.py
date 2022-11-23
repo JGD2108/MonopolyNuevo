@@ -1,10 +1,16 @@
 import sys, time
 from Botones import Button
 import pygame
-from Tablero import Tablero
+from Tablero import Tablero,chestList,fortList
 from player import Jugador
 from Labels import Label
+from Cartas import *
 from Listas.listaCircular import listaCircular
+
+Board = listaCircular()
+tablero = Tablero(Board)
+tablero.getBoard()
+
 class Game:
     def __init__(self) -> None:
         self.currentPlayer: Jugador= None
@@ -26,12 +32,32 @@ class Game:
                 self.currentPlayer.puedoJugar = True
                 break
         return self.currentPlayer
+        
+    def check_pos(self, board:Tablero):
+  
+        brd_property = board.Board.Recorrido(self.currentPlayer.current_position)
+        print(self.currentPlayer.current_position)
+
+        
+        if(isinstance(brd_property, Propiedades)):
+            ## input comprar o subastar
+            ## si comprar, resta balance, añade a lista, Propiedad.CambiarDueño= self.current_player
+            ## brd_property.CambiarDueño = self.current_player
+            ## si va subastar: print("Unda el boton subasta")
+            print("Estas en una propiedad")
+
+        elif(brd_property==chestList):
+            print("Estas en un  cofre")
+        elif(brd_property==fortList):
+            print("Estas en una fortuna")
+        else:
+            print("wiuwiuwiuww")
     def jugar(self):
         if (self.currentPlayer.puedoJugar):
             cuantoSeMueve=self.currentPlayer.roll_dice()
             self.currentPlayer.move_player(cuantoSeMueve)
             ##verificar donde cae
-            
+            self.check_pos(self,tablero)
             Game.changeTurn(Game)
             pygame.display.update()
         else:
@@ -105,21 +131,9 @@ def auction():
         auc = int(input("Digita un numero: "))
     except ValueError:
         print("DIGITA UN NUMERO VALIDO")
-
-def roll():
-    Luisa.roll_dice()
-    # text = Label(screen, "1", 781, 378, 60, "white") # out of loop
-    # text.draw()
-    # time.sleep(3)
-    # into the loop
-      # Label(LDICE, "1", 800, 450, 36)
-        # show_labels()
     
 def play():
-    Board = listaCircular()
     Game.turnSelect(Game)
-    tablero = Tablero(Board)
-    tablero.getBoard()
     
     while True:
         pygame.display.set_caption("Play")

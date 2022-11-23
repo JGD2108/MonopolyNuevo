@@ -1,6 +1,6 @@
 import abc
 from player import Jugador
-from random import randint, random
+from random import randint
 
 '''
 @autor Jose Gomez
@@ -23,13 +23,6 @@ class Propiedades(Cartas):
     def CambiarDueño(self,a):
         self.dueño = a
 
-class Utilidades(Cartas):
-    @property
-    def CambiarDueño(self):
-        return self.dueño
-    @CambiarDueño.setter
-    def CambiarDueño(self,a):
-        self.dueño = a
 
 """
 Tipos de cartas

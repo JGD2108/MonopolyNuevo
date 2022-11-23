@@ -1,6 +1,6 @@
 from random import randint
 from Listas.listaCircular import listaCircular
-from Cartas import *
+from Tablero import *
 class Jugador():
 
     def __init__(self, name: str, balance:int, cards_owned:list,
@@ -30,6 +30,7 @@ class Jugador():
         dice_amt = dice1 + dice2
         if dice1==dice2: 
             self.doubles_counter+=1
+            self.in_jail = False
         else:
             self.doubles_counter=0
         return dice_amt
@@ -63,19 +64,16 @@ class Jugador():
     
     def comprar(self):
         pass
-
-    def check_pos(self, board:listaCircular):
-  
-        brd_property = board.Recorrido(self.current_position)
         
-        if(brd_property):
-            pass
-
-        '''
-            serie de condicionales que comprueban la posicion
-        '''
-
     def check_if_bankrupt(self, amt_owed):
         pass
+
+class Jail:
+    def __init__(self) -> None:
+        self.jugador: Jugador = None
+    def checkCarcel(self):
+        if self.jugador.in_jail == True:
+            self.jugador.roll_dice()
+
         
 

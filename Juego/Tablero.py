@@ -11,6 +11,8 @@ File4 = "Robar.xlsx"
 class Tablero:
     def __init__(self,Board:listaCircular) -> None:
         self.Board = Board
+        self.PTR = None
+        self.ULT = None
     def getBoard(self):
         getLists(chestList, fortList, propiedades,robar)
         self.Board.AddNode("Go", [662,665])
@@ -54,6 +56,21 @@ class Tablero:
         self.Board.AddNode(fortList,[662,532])#hola hola 
         self.Board.AddNode(propiedades[23],[662,588])
         return self.Board
+
+    def Recorrido(self,amt:int):
+        P = self.PTR
+
+        #print(P.data, end="->")
+        if amt>0:
+            P = P.next
+            cont=1
+            while((P != self.PTR)and cont<amt):
+                #print(P.data, end="->")
+                P = P.next
+                cont+=1
+            return P.data
+        elif amt==0:
+            return P.data
 
 def getRows(excel_file, sheet_name, start_row = 1):
     excel_data = pd.read_excel(excel_file, sheet_name = sheet_name, header=None)
