@@ -120,7 +120,7 @@ def play():
     Game.turnSelect(Game)
     tablero = Tablero(Board)
     tablero.getBoard()
-    print(tablero.Board.Recorrido(41))
+    
     while True:
         pygame.display.set_caption("Play")
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
