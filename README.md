@@ -1,1 +1,2 @@
-# MonopolyNuevo
+# Monopoly#
+![image](uml.png)
