@@ -8,12 +8,13 @@ from Labels import Label
 from Cartas import *
 from Cartas import Robo,Fortuna,Cofre
 from Listas.listaCircular import listaCircular
+from subasta import subasta
 
 Board = listaCircular()
 tablero = Tablero(Board)
 tablero.getBoard()
-Luisa = Jugador('Luisa',1500,0,False,0,False)
-Jorge = Jugador('Jorge',1500,0,False,0,False)
+Luisa = Jugador('Luisa',1500,0,False,0,False,0)
+Jorge = Jugador('Jorge',1500,0,False,0,False,0)
 class Game:
     def __init__(self) -> None:
         self.currentPlayer: Jugador= None
@@ -56,8 +57,24 @@ class Game:
                     print(f"Tu saldo actual es de {self.currentPlayer.balance}")
 
                 elif(user_choice==2):
-                    #usar subastas
-                    pass
+                    Subasta = subasta(Luisa,brd_property)
+                    Subasta.subastar()
+                    Subasta = subasta(Jorge,brd_property)
+                    Subasta.subastar()
+                    if(Jorge.subasta>Luisa.subasta):
+                        brd_property.CambiarDueño = "Jorge"
+                        Jorge.reduce_balance(Jorge.subasta)
+                        print(f"Enhora buena Jorge ahora eres dueñ@ de {brd_property.nombre}")
+                        
+                    elif(Jorge.subasta<Luisa.subasta):
+                        brd_property.CambiarDueño = "Luisa"
+                        Luisa.reduce_balance(Luisa.subasta)
+                        print(f"Enhora buena Luisa ahora eres dueñ@ de {brd_property.nombre}")
+                    Luisa.subasta=0
+                    Jorge.subasta=0
+
+
+                        
             else:
                 print(f"Oh nooo, {brd_property.dueño} es dueño de la propiedad")
                 print(f"Tendras que pagar {brd_property.renta}")
