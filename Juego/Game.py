@@ -233,10 +233,11 @@ def trade():
     pass
 
 def auction():
-    try:
-        auc = int(input("Digita un numero: "))
-    except ValueError:
-        print("DIGITA UN NUMERO VALIDO")
+    pass
+    # try:
+    #     auc = int(input("Digita un numero: "))
+    # except ValueError:
+    #     print("DIGITA UN NUMERO VALIDO")
     
 def play():
     Game.turnSelect(Game)
@@ -283,7 +284,7 @@ def play():
                     Game.jugar(Game)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_AUCTION.checkForInput(PLAY_MOUSE_POS):
-                    auction()
+                    pass
         pygame.display.update()
                     
 
